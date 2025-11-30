@@ -76,30 +76,31 @@ if __name__ == "__main__":
 
     print("Average reward = ", np.mean(rewards))
 
-    # # plot the rewards in function of epochs
-    # plt.plot(rewards)
-    # plt.xlabel('Epochs')
-    # plt.ylabel('Total Reward')
-    # plt.title('Q-Learning Training Rewards')
-    # plt.show()
+    # plot the rewards in function of epochs
+    plt.plot(rewards)
+    plt.xlabel('Epochs')
+    plt.ylabel('Total Reward')
+    plt.title('Q-Learning Training Rewards')
+    plt.show()
 
-    # print("Training finished.\n")
+    print("Training finished.\n")
 
     
     """
     Evaluate the q-learning algorithm
     """
-    # print("Evaluating...")
-    # eval_rewards = []
-    # for e in range(10):
-    #     S, _ = env.reset()
-    #     r = 0
-    #     done = False
-    #     while not done:
-    #         A = np.argmax(Q[S])  # greedy policy
-    #         S, R, done, _, _ = env.step(A)
-    #         r += R
-    #     eval_rewards.append(r)
-    # print("Average evaluation reward = ", np.mean(eval_rewards))
+    print("Evaluating...")
+    eval_rewards = []
+    for e in range(10):
+        S, _ = env.reset()
+        r = 0
+        done = False
+        while not done:
+            A = np.argmax(Q[S])  # greedy policy
+            Sprime, R, done, _, _ = env.step(A)
+            r += R
+            S = Sprime
+        eval_rewards.append(r)
+    print("Average evaluation reward = ", np.mean(eval_rewards))
 
     env.close()
